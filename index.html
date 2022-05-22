@@ -9,11 +9,11 @@
   <link href="/style.css" rel="stylesheet">
 
   <script>
-    function login() {
+     function login() {
       const email = $("#email").val();
       const pass = $("#pass").val();
-
-      $.post("http://localhost:4000/index.html/login", { email: email, pass: pass }, (data, status) => {
+      
+      $.post("http://localhost:4000/login", { email, pass }, (data, status) => {
         
         if (status === 'success')
           alert(`Login success\n${data}`);
@@ -38,6 +38,7 @@
   
 
   <div class="form-body">
+   
     <div class="row">
         <div class="form-holder">
             <div class="form-content">
@@ -51,6 +52,9 @@
                         <div class="col-md-12">
                              <label for="email"></label>
                              <input class="form-control" type="email" name="email" placeholder="E-mail Address" id="email" required>
+                             <div class="valid-feedback">Email field is valid!</div>
+                             <div class="invalid-feedback">Email field cannot be blank!</div>
+  
                         </div>
 
                       
@@ -58,6 +62,9 @@
                        <div class="col-md-12">
                         <label for="password"></label>
                           <input class="form-control" type="password" name="password" placeholder="Password" id="pass" required>
+                          <div class="valid-feedback">Password field is valid!</div>
+                          <div class="invalid-feedback">Password field cannot be blank!</div>
+ 
                        </div>
 
 
@@ -68,7 +75,7 @@
               
 
                         <div class="form-button mt-3">
-                            <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                            <button id="submit" type="submit" class="btn btn-primary">sign in</button>
                         </div>
                         <br>
                         <div class="signup">
@@ -84,4 +91,33 @@
 
 </body>
 
+<script>
+  (function () {
+'use strict'
+const forms = document.querySelectorAll('.requires-validation')
+Array.from(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+</script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
